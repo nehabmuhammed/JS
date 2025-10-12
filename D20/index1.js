@@ -105,7 +105,6 @@ employees.forEach((eachEmp) => {
     if(totalHours>maxHours){
         maxHours = totalHours
         empName = eachEmp.empName
-        emp = eachEmp
     }
 })
 console.log(maxHours,empName)
