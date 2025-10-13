@@ -104,8 +104,29 @@ let leastMark = roll4.marks.reduce((acc,curr) => acc > curr['score'] ? acc:curr)
 
 
 // 8. Print department having the highest total marks (sum of all its students)
-let totalMarks = students.filter((eachMark) => eachMark.dept == "CS")
+let depMark = 0
+let depName = ""
+students.forEach((eachDep) => {
+    let totalDepMark = eachDep.marks.reduce((acc,curr) => acc + curr['score'],0)
+    if(totalDepMark>depMark){
+        depMark = totalDepMark
+        depName = eachDep.dept
+    }
+})
+// console.log(depName,":",depMark)
+
 
 // 9. Print topper (student with highest marks in English)
+let stdName = ""
+let engMark = 0
+students.forEach((eachStudent) => {
+     eachStudent.marks.forEach((eachMark) => {
+        if(eachMark.subject == "English"){
+            let highest = eachMark.reduce((acc,curr) => acc > curr['score'],0)
+            console.log(highest)
+        }
+     })
+    
+})
 
 // 10. Print average marks of all students together
