@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <center>
+        <textarea name="" id="text"></textarea>
+        <button onclick="checkLetters()">check Letters</button>
+        <h1 id="count"></h1>
+    </center>
+    <script>
+        const checkLetters = () => {
+        const text = document.getElementById('text').value;
+         const textArr = text.split('');
+         const newArr = textArr.filter((each) => each != " ")
+         newArr.length
+        document.getElementById('count').innerHTML =  newArr.length
+        document.getElementById('text').value = ""
+        
+    }
+    </script>
+
+</body>
+</html>

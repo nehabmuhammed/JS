@@ -68,4 +68,7 @@ button:active {
   background: #ffb700;
   transform: scale(0.98);
 }
-    
+p{
+    color: white;
+    margin-bottom: 5px;
+}
