@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- <p id="para">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aliquam illum deleniti vero esse rem neque veniam corrupti placeat facere architecto consequuntur enim nulla laboriosam voluptates suscipit, ut totam porro?</p> -->
+    <div id="img">
+      <img
+        src="https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE="
+        alt=""
+      />
+    </div>
+    <button onclick="hide()">hide</button>
+    <button onclick="show()">Show</button>
+
+    <script>
+      const hide = () => {
+        document.getElementById(
+          "img"
+        ).innerHTML = `  <img src="https://media.istockphoto.com/id/814423752/photo/eye-of-model-with-colorful-art-make-up-close-up.jpg?s=612x612&w=0&k=20&c=l15OdMWjgCKycMMShP8UK94ELVlEGvt7GmB_esHWPYE=" alt="">`;
+      };
+      const show = () => {
+        document.getElementById(
+          "img"
+        ).innerHTML = `  <img src="https://media.istockphoto.com/id/517188688/photo/mountain-landscape.jpg?s=612x612&w=0&k=20&c=A63koPKaCyIwQWOTFBRWXj_PwCrR4cEoOw2S9Q7yVl8=" alt="">`;
+      };
+    </script>
+  </body>
+</html>
