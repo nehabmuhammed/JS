@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">PostId</th>
+          <th scope="col">id</th>
+          <th scope="col">name</th>
+          <th scope="col">email</th>
+          <th scope="col">body</th>
+        </tr>
+      </thead>
+      <tbody id="result1">
+      
+      </tbody>
+    </table>
+</body>
+<script>
+    fetch('https://jsonplaceholder.typicode.com/comments').then((res) => {
+        console.log(res)
+        res.json().then((result) => {
+            console.log(result)
+            result.map((each) => (
+                result1.innerHTML += `
+                <tr>
+    <th scope="row">${each.postId}</th>
+      <td>${each.id}</td>
+      <td>${each.name}</td>
+      <td>${each.email}</td>
+      <td>${each.body}</td>
+    </tr>
+                `
+            ))
+        }).catch((err) => {
+            console.log(err)
+        })
+    }).catch((err) => {
+        console.log(err)
+    })
+</script>
+</html>
