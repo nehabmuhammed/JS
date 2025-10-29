@@ -1,28 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-</head>
-<body class="bg-dark text-center">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body class="bg-dark text-center">
     <h1 class="text-white">Contry Details</h1>
     <div class="d-flex flex-column align-items-center gap-3 mt-5">
-        <input type="text" placeholder="Enter Country Name" id="countryName">
-        <button class="btn btn-outline-warning" onclick="onSearch()">Search</button>
+      <input type="text" placeholder="Enter Country Name" id="countryName" />
+      <button class="btn btn-outline-warning" onclick="onSearch()">
+        Search
+      </button>
     </div>
-    
-</body>
-<script>
-    const onSearch = () => {
-        if(countryName.value !== ""){
-            //apicall
+    <div id="result" class="container text-white d-flex justify-content-between"> 
+
+    </div>
+    <ul id="result1"></ul>
+  </body>
+  <script>
+    const onSearch = async () => {
+      if (countryName.value !== "") {
+        //apicall
+        let apiResponse = await fetch(
+          `https://restcountries.com/v3.1/name/${countryName.value}`
+        );
+        let data = await apiResponse.json();
+        console.log(data);
+        if(apiResponse.status == 200){
+            //display data
+            let dataDetails = data[0]   
+            console.log(dataDetails)
+            let currencyName = Object.keys(dataDetails.currencies)[0]
+            let offCurrency = dataDetails['currencies'][currencyName]['name']
+            let lang = dataDetails['languages']  
+            let forObj = Object.values(lang) 
+            console.log(forObj)
+            console.log(offCurrency)
+            result.innerHTML += `
+             <div>
+         <h1>Country Name: <span id="countryCommonName">${dataDetails.name.common}</span></h1>
+        <h2>Official  Name: <span id="officialName">${dataDetails.name.official}</span></h2>
+        <h3>Capital: <span id="capital">${dataDetails.capital}</span></h3>
+       </div>
+        <div>
+            <h3>Population: <span id="population">${dataDetails.population}</span></h3>
+        <h3>TimeZone: <span id="timeZone">${dataDetails.timezones}</span></h3>
+        <img src=${dataDetails.flags.png} alt="flag">
+        <h3>Currency: <span id="capital">${offCurrency}</span></h3>
+
+        </div>
+        
+            `
+          forObj.map((each) => (
+            result.innerHTML += `<li>${each}</li>`
+          ))
+            
+
         }else{
-            //alert
-            alert('Plaese Enter the Country Name')
+            alert(data.message)
         }
-    }
-</script>
+      } else {
+        //alert
+        alert("Plaese Enter the Country Name");
+      }
+    };
+  </script>
 </html>
