@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" name="" id="input">
+    <button onclick="addTask()">Add</button>
+    <ul id="result"></ul>
+
+</body>
+<script>
+    let taskArr = JSON.parse(localStorage.getItem('todo')) || []
+    const addTask = () =>{
+        let task = input.value;
+        taskArr.push(task)
+        console.log(taskArr)
+        localStorage.setItem("todo",JSON.stringify(taskArr))
+
+    }
+     const displayTodo = () => {
+        taskArr.map((each,index) => (
+            result.innerHTML += `
+            <li>${each}</li>
+            <button onclick="deleteTodo(${index})">Delete</button>
+            <button onclick="editDetails(${index})">edit</button>
+
+            `
+        ))
+     }
+            displayTodo()
+       const deleteTodo = (index) => {
+        taskArr.splice(index,1)
+        console.log(index)
+        localStorage.setItem('todo',JSON.stringify(taskArr))
+       }     
+
+       const editDetails = (index) => {
+            input.value = taskArr[index]
+            deleteTodo(index)
+       }
+    
+</script>
+
+</html>

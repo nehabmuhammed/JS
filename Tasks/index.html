@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-dark">
+    <h1 class="text-center text-white">Student Details</h1>
+    <div class="d-flex justify-content-center mb-5">
+      <input
+        type="text"
+        id="studentName"
+        class="me-3"
+        placeholder="Student Name"
+      />
+      <input
+        type="text"
+        id="studentAge"
+        class="me-3"
+        placeholder="Student Name"
+      />
+      <input
+        type="text"
+        id="studentCource"
+        class="me-3"
+        placeholder="Student Name"
+      />
+      <button class="btn btn-warning" onclick="addStudents()">Add details</button>
+    </div>
+    <table class="table container">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Student Name</th>
+          <th scope="col">Age</th>
+          <th scope="col">Cource</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody id="display">
+       
+      </tbody>
+    </table>
+  </body>
+  <script>
+    let studentsData = JSON.parse(localStorage.getItem("students")) || [];
+    console.log(studentsData)
+
+    const addStudents = () => {
+      let stdName = studentName.value;
+      let stdAge = studentAge.value;
+      let stdCource = studentCource.value;
+
+      let stdObj = {stdName,stdAge,stdCource}
+      studentsData.push(stdObj)
+        console.log(studentsData)
+
+      localStorage.setItem('students',JSON.stringify(studentsData))
+    };
+      const displayDetails = () => {
+        studentsData.map((each,index) => (
+            display.innerHTML += `
+             <tr>
+          <th scope="row">1</th>
+          <td>${each.stdName}</td>
+          <td>${each.stdAge}</td>
+          <td>${each.stdCource}</td>
+          <td>
+            <button onclick="deleteStudent(${index})"><i class="ri-chat-delete-fill"></i></button>
+            <button onclick="updateDetails(${index})"><i class="ri-edit-line"></i></button>
+          </td>
+        </tr>
+            `
+        ))
+      }
+displayDetails()
+      const deleteStudent = (index) => {
+        console.log(studentsData[index])
+        studentsData.splice(index,1)
+        localStorage.setItem('students',JSON.stringify(studentsData))
+      }
+
+      const updateDetails = (index) => {
+        let stdDetails = studentsData[index]
+        console.log(stdDetails)
+        studentName.value = stdDetails.stdName
+        studentAge.value = stdDetails.stdAge
+        studentCource.value = stdDetails.stdCource
+        deleteStudent(index)
+      }
+  </script>
+</html>
